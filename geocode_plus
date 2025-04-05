@@ -1,0 +1,58 @@
+# Geocoding lat and long for California
+#leases_coords_CA <- leases |>
+#  filter(state == "CA") |>
+#  geocode(FullAddress, method = 'osm', lat = latitude, long = longitude)
+
+# Encoding all missing values in lat or long
+MISSING <- is.na(leases_coords_CA$latitude) | is.na(leases_coords_CA$longitude)
+
+# Getting rid of all NA lat/long values
+leases_coords_CA_noNA <- subset(leases_coords_CA, subset = !MISSING)
+
+# Translating the dataframe into an SF object
+leases_coords_CA_sf <- leases_coords_CA_noNA |>
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+
+# Constructing CA counties object
+CA_counties <- 
+  USAboundaries::us_counties(states = c("california")) |> 
+  select(-state_name)
+
+# Joining leases and county objects
+leases_coords_CA_sf_join <- CA_counties |>
+  st_join(leases_coords_CA_sf)
+
+# Creating the Covid variable
+leases_coords_CA_sf_new <- leases_coords_CA_sf_join |>
+  mutate(covid = case_when(
+    year < 2020 ~ 0,
+    year >= 2020 ~ 1
+  ))
+
+# Creating the numeric quarter variable
+leases_coords_CA_sf_new <- leases_coords_CA_sf_new |>
+  mutate(quarter_numeric = case_when(
+    quarter == "Q1" ~ 1,
+    quarter == "Q2" ~ 2,
+    quarter == "Q3" ~ 3,
+    quarter == "Q4" ~ 4
+  ))
+
+# Creating the time variable
+leases_coords_CA_sf_new <- leases_coords_CA_sf_new |>
+  mutate(time = (year - 2018) * 4 + quarter_numeric)
+
+# Giving the data to team
+#write.csv(leases_coords_CA_sf_new, file = "data/leases_coords_CA.csv")
+
+all_counties <- unique(leases_coords_CA_sf_new$name)
+
+# Constructing model
+lm <- lm(available_space ~ time * covid, data = leases_coords_CA_sf_new)
+summary(lm)
+
+# San diego ventura, los angele
+san_diego <- leases_coords_CA_sf_new |>
+  filter(name == "San Diego")
+lm <- lm(available_space ~ time * covid, data = san_diego)
+san_diego |> ggplot(aes(x = time, y = available_space, color = as.factor(internal_class))) + geom_point() + geom_smooth(method = "lm")
