@@ -1,0 +1,22 @@
+## Data Cleaning
+
+# Filters to just CA
+leases_ca <- leases |> filter(state == "CA")
+
+# Makes Indicator for Covid
+leases_ca |> mutate(covid = case_when(
+    year < 2020 ~ 0,
+    year >= 2020 ~ 1
+  ))
+
+# Turn Quarters to Number Var
+leases_ca <- leases_ca |> mutate(quarter_num = case_when(
+  quarter == "Q1" ~ 1,
+  quarter == "Q2" ~ 2,
+  quarter == "Q3" ~ 3,
+  quarter == "Q4" ~ 4,
+  ))
+
+
+# Order Quarters by Year (1-28)
+leases_ca <- leases_ca |> mutate(time = (leases_ca$year - 2018)*4 + leases_ca$quarter_num)
