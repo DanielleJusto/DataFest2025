@@ -1,0 +1,13 @@
+# Link: https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html
+
+# Load 2020 Data
+house_20 <- read.csv("Data/asecpub20csv/hhpub20.csv")
+person_20 <- read.csv("Data/asecpub20csv/pppub20.csv")
+
+# Select Vars
+person_20 <- person_20 |> select(AGE1,PRDTRACE,PRDASIAN,A_MJOCC,PEIO1COW,PH_SEQ)
+house_20 <- house_20 |> select(GEDIV, GEREG,GESTFIPS, HEFAMINC, 
+                                H_TYPEBC, H_YEAR, H_MONTH,H_SEQ)
+
+house_person_20 <- person_20 |>
+  inner_join(house_20, by = c("PH_SEQ" = "H_SEQ"))
