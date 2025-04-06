@@ -1,16 +1,20 @@
 ```{r}
-# Read first
+# Read first year
   file_path <- paste0("house_person_data/house_person_", 2019, ".csv")
   house_person <- read.csv(file_path)
   
 # Range of next years
   years <- 2020:2024
-  
+
+# iterate through years
 for (year in years) {
-  
+
+  # change file path
   file_path <- paste0("house_person_data/house_person_", year, ".csv")
+  # read in new file
   second_file <- read.csv(file_path)
-  
+
+  # bind to full data frame
   house_person <- rbind(house_person, second_file)
 }
 ```
