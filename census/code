@@ -1,26 +1,16 @@
 ```{r}
-#2019
-house_19 <- read.csv("Data/hhpub19.csv")
-person_19 <- read.csv("Data/pppub19.csv")
-
-person_19 <- person_19 |> select(AGE1,PRDTRACE,PRDASIAN,A_MJOCC,PEIO1COW,PH_SEQ)
-house_19 <- house_19 |> select(GEDIV, GEREG,GESTFIPS, HEFAMINC, 
-                                H_TYPEBC, H_YEAR, H_MONTH,H_SEQ)
-
-house_person_19 <- person_19 |>
-  inner_join(house_19, by = c("PH_SEQ" = "H_SEQ"))
-```
-
-
-```{r}
-#2021
-house_21 <- read.csv("Data/hhpub21.csv")
-person_21 <- read.csv("Data/pppub21.csv")
-
-person_21 <- person_21 |> select(AGE1,PRDTRACE,PRDASIAN,A_MJOCC,PEIO1COW,PH_SEQ)
-house_21 <- house_21 |> select(GEDIV, GEREG,GESTFIPS, HEFAMINC, 
-                                H_TYPEBC, H_YEAR, H_MONTH,H_SEQ)
-
-house_person_21 <- person_21 |>
-  inner_join(house_21, by = c("PH_SEQ" = "H_SEQ"))
+# Read first
+  file_path <- paste0("house_person_data/house_person_", 2019, ".csv")
+  house_person <- read.csv(file_path)
+  
+# Range of next years
+  years <- 2020:2024
+  
+for (year in years) {
+  
+  file_path <- paste0("house_person_data/house_person_", year, ".csv")
+  second_file <- read.csv(file_path)
+  
+  house_person <- rbind(house_person, second_file)
+}
 ```
