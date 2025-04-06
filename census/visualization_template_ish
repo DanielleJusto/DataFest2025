@@ -1,0 +1,11 @@
+``{r}
+household_income_19 <- 
+  house_person_19 |>
+  ggplot(aes(x = , y = )) +
+  geom_point() + 
+  theme_bw() +
+  labs(title = "",
+       x = "",
+       y = "")
+household_income_19
+```
