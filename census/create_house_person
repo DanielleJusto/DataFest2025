@@ -1,6 +1,6 @@
 ```{r}
 # Read first year
-  file_path <- paste0("house_person_data/house_person_", 2019, ".csv")
+  file_path <- paste0("fixed_house_person_data/house_person_", 2019, ".csv")
   house_person <- read.csv(file_path)
   
 # Range of next years
@@ -10,7 +10,7 @@
 for (year in years) {
 
   # change file path
-  file_path <- paste0("house_person_data/house_person_", year, ".csv")
+  file_path <- paste0("fixed_house_person_data/house_person_", year, ".csv")
   # read in new file
   second_file <- read.csv(file_path)
 
