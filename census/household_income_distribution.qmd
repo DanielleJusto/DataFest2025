@@ -1,0 +1,17 @@
+---
+title: "Census_Analysis"
+format: pdf
+editor: visual
+---
+
+Display histograms of distribution of income before and after COVID in different california counties
+  
+```{r}
+house_person |> filter(GESTFIPS == 06) |> filter(GTCO == 073) |> filter(H_YEAR == 2019 | H_YEAR == 2024) |> ggplot(aes(x = HEFAMINC)) + geom_histogram() + scale_y_continuous(limits = c(0, 450)) + facet_wrap(~H_YEAR) + theme_bw()  + labs(title = "Distribution of Income in San Diego", x = "Income Class")
+
+house_person |> filter(GESTFIPS == 06) |> filter(GTCO == 111) |> filter(H_YEAR == 2019 | H_YEAR == 2024) |> ggplot(aes(x = HEFAMINC)) + geom_histogram() + facet_wrap(~H_YEAR) + theme_bw()  + labs(title = "Distribution of Income in Ventura", x = "Income Class")
+
+house_person |> filter(GESTFIPS == 06) |> filter(GTCO == 037) |> filter(H_YEAR == 2019 | H_YEAR == 2024) |> ggplot(aes(x = HEFAMINC)) + geom_histogram() + facet_wrap(~H_YEAR) + theme_bw()  + labs(title = "Distribution of Income in LA", x = "Income Class")
+
+house_person |> filter(GESTFIPS == 06) |> filter(GTCO == 075) |> filter(H_YEAR == 2019 | H_YEAR == 2024) |> ggplot(aes(x = HEFAMINC)) + geom_histogram() + facet_wrap(~H_YEAR) + theme_bw()  + labs(title = "Distribution of Income in SF", x = "Income Class")
+```
