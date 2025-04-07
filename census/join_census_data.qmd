@@ -1,5 +1,10 @@
-#
-# Link: https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html
+---
+title: "Census_Analysis"
+format: pdf
+editor: visual
+---
+
+Link: https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html
 
 Read and join house and person data for one year
 ```{r}
