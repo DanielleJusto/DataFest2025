@@ -1,3 +1,9 @@
+---
+title: "Geocode Plus"
+author: "Zoe Khan"
+format: pdf
+editor: visual
+---
 # Geocoding lat and long for California
 #leases_coords_CA <- leases |>
 #  filter(state == "CA") |>
