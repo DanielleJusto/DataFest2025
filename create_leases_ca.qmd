@@ -1,3 +1,9 @@
+---
+title: "Create Leases"
+author: "Zoe Khan"
+format: pdf
+editor: visual
+---
 ## Data Cleaning
 
 ```{r}
