@@ -6,7 +6,7 @@ editor: visual
 
 Link: https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.html
 
-Read and join house and person data for one year
+Select variables in house and person data sets, then join house and person data for one year
 ```{r}
 # Load 2020 Data
 house_20 <- read.csv("Data/asecpub20csv/hhpub20.csv")
@@ -21,7 +21,8 @@ house_person_20 <- person_20 |>
   inner_join(house_20, by = c("PH_SEQ" = "H_SEQ"))
 ```
 
-Read and join house and person data iteratively for 2019-2024
+Select variables in house and person data sets, then join house and person data iteratively for 2019-2024.
+
 ```{r}
 # Read first
   file_path <- paste0("census_data/house_person_", 19, ".csv")
