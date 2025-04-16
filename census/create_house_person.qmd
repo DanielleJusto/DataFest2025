@@ -5,6 +5,7 @@ editor: visual
 ---
 
 Creates full data set of Census Data 2020-2024
+
 ```{r}
 # Read first year
   file_path <- paste0("fixed_house_person_data/house_person_", 2019, ".csv")
