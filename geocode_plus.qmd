@@ -5,7 +5,7 @@ format: pdf
 editor: visual
 ---
 # Geocoding lat and long for California
-#leases_coords_CA <- leases |>
+# leases_coords_CA <- leases |>
 #  filter(state == "CA") |>
 #  geocode(FullAddress, method = 'osm', lat = latitude, long = longitude)
 
